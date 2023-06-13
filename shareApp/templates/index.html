@@ -1,0 +1,122 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block title %}
+详情介绍
+{% endblock %}
+
+
+{% block content2 %}
+
+<link href="{% static 'css/article.css' %}" rel="stylesheet">
+<div  style="background-color: rgb(245, 245, 245);" >
+    <!-- <div  class="row row-4 " >
+        <div class="col-md-8">
+         
+          
+        </div>
+       
+        {% if request.user.is_active %}
+        <div class="right menu col-md-4 lead ">
+          <button type="button" class="btn btn-primary btn-lg"><a class="item" >{{ request.user.username }}</a></button>
+          
+          <button type="button" class="btn btn-primary btn-lg"><a class="item" href="{% url 'shareApp:log_out' %}">退出</a></button>
+          
+          
+      </div>
+      <div class="text-center">
+         <a class="item lead" href="{% url 'shareApp':'index' }">文章分享</a>
+      </div>
+        {% else %}
+        <div class="right menu col-md-4 lead">
+          <button type="button" class="btn btn-primary btn-lg"><a class="item" href="{% url 'shareApp:regist' %}">注册</a></button>
+          <button type="button" class="btn btn-primary btn-lg"><a class="item" href="{% url 'shareApp:login' %}">登陆</a></button>
+          
+        </div>
+        <div class="text-center">
+          <a class="item lead" href="{% url 'shareApp':'index' }">文章分享</a>
+       </div>
+        {% endif %}
+    </div> -->
+    <div style="min-height: 70px;" class="ui inverted fixed stackable red large menu">
+      <a class="item " href="/">返回</a>
+      {% if request.user.is_active %}
+      <div class="right menu">
+        <a class="item" >{{ request.user.username }}</a>
+        <a class="item" href="{% url 'shareApp:log_out' %}">退出</a>
+    </div>
+      {% else %}
+      <div class="right menu">
+        <a class="item" href="{% url 'shareApp:regist' %}">注册</a>
+        <a class="item" href="{% url 'shareApp:login' %}">登陆</a>
+      </div>
+      {% endif %}
+     </div>
+    <div style="width: 90%;margin: auto;padding-top: 10em;" class='center-block'>
+        <div class="ui four stackable cards">
+          {% for ar in cons %}
+            <div class="ui card">
+                <div class="image">
+                  <img src="/media/{{ ar.img }}">
+                </div>
+                <div class="content">
+                  <a class="header" href="/shareApp/article/{{ ar.id }}">{{ ar.tit }}</a>
+                  <div class="meta">  
+                  </div>
+                  <div class="description">
+                    <div class="extra content">
+                      <span class="right floated">{{ ar.c_tim }}</span>
+                      <span>
+                        <i class="user icon"></i>
+                        admin
+                      </span>
+                    </div>
+                  </div>
+                </div> 
+            </div>
+          {% endfor %}
+           
+        </div>
+
+        <div style="padding: 30px 0 30px 0;" class="ui vertical segment">
+            <div class="ui centered grid">
+                <div class="ui pagination menu">
+                  {% if cons.has_previous %}
+                    <a href="?page={{ cons.previous_page_number }}" class="item">
+                        <i class="icon left arrow"></i>
+                    </a>
+                    {% else %}
+                    <a href="#" class="disabled item">
+                      <i class="icon left arrow"></i>
+                    </a>
+                    {% endif %}  
+                    <!-- <a class="item" href="#">
+                      当前第{{ cons.number }}页
+                    </a>                    
+                    <a class="item" href="#">
+                     共{{ cons.paginator.num_pages }}页
+                    </a> -->
+                    {% for ls in cons.paginator.page_range %}
+                    <a class="item" href="?page={{ ls }}">
+                      {{ ls }}
+                     </a>
+                     {% endfor %}
+                    {% if cons.has_next %}                    
+                    <a href="?page={{ cons.next_page_number }}" class="item">
+                        <i class="icon right arrow"></i>
+                    </a>
+                    {% else %}
+                    <a href="#" class="disabled item">
+                      <i class="icon right arrow"></i>
+                    </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+   
+  </div>
+
+
+{% endblock %}

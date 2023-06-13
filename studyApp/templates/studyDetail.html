@@ -1,0 +1,21 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+
+{% block title %}
+内容详情
+{% endblock %}
+
+{% block content2 %}
+<link href="{% static 'css/study.css' %}" rel="stylesheet">
+<!-- 主体内容 -->
+<div class="container">
+    <div class="model-details-product-title">
+        {{study1.title}}
+        <div class="model-foot">发布时间：{{study1.publishDate|date:"Y-m-d"}}&nbsp;&nbsp;浏览次数：{{study1.views}}</div>
+    </div>
+    <div class="model-details">
+       {{study1.description2|safe}}
+    </div>
+</div>
+
+{% endblock %}

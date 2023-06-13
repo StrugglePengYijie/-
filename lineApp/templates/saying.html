@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+经典语句
+{% endblock %}
+{% block content %}
+
+<img class="img-responsive" src="{% static 'img/1650615370678.png' %} " width="1200px">
+{% endblock %}
+{% block content2 %}
+<div class="container">
+    <div class="row row-3">
+        <div class="col-md-3">
+            <div class="model-title">
+                爱好
+            </div>
+            <div class="model-list">
+                <ul class="list-group">
+                    <li class="list-group-item " id="cartoon"><a href="{% url 'hobbyApp:cartoon' %}">动漫</a></li>
+                    <li class="list-group-item " id="novel"><a href="{% url 'hobbyApp:novel' %}">小说</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="model-details-title">
+                小说
+            </div>
+            <div>
+                <h4>《爱情公寓》</h4>
+                <p>相聚和离别，仿佛一个转身，一圈接着一圈，连成生命的舞蹈，有的人还会回来，有的人知道再见太难，幸运的是，爱的邂逅每天都会发生。</p>
+                <p>不要解释，彪悍的人生不需要解释。</p>
+                <p>我拿什么跟你赌，不是看你要什么，而是看我有什么。</p>
+                <p>解释就是通过观察和思考说明事物变化的原因，或事物发展的联系，或事物发展的规律，你解释就是为了掩饰，掩饰的就是事实，事实就是罪恶的开始，人类喜欢掩饰，正是人类最后的悲哀。 </p>
+                <p>有些不属于你的梦，永远也不会属于你。</p>
+                <p>她必须选择做完一个选择以后，才能告诉自己哪个错误更值得去犯，人们往往为了逃避一个错误而去犯另外一个错误，既然很多错误无法回避，何必让悔恨埋葬你的人生呢，与其逃来逃去 ，还不如去面对一个。 </p>
+                <p>人的一生都会扮演很多角色，如果你不高兴，你可以把剧本扔了，不过记住，有一份剧本是真正属于你的，千万别丢错了。</p>
+                <p>机会像雨点般的向我打来，可是我一一闪过了。</p>
+                <p>谁不想体验一次当胜利者的感觉，可是我就没有这么幸运，活了快三十年了，生命中从来没有碰到一个要改变我的人，如果我的生命中也有一个胜利的转折点，现在我会是怎么样呢？</p>
+                <p>一切的过去都已现在为归宿，一切的将来都已现在为起点。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

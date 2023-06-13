@@ -1,0 +1,150 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>血染的樱草花个人博客{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header ">
+                <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example"
+                    aria-expanded="false">
+                    <span>导航栏</span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse " id="bs-example">
+                <ul class="nav navbar-nav" style="width:100%;">
+                    <li class="nav-top boke"><img src="{% static 'img/apple-touch-icon.png'%}" width="40px"></li>
+                    <li class="nav-top " id="home">
+                        <a href="{% url 'home' %} ">首页</a>
+                    </li>
+                    <li class="dropdown nav-top" id="anecodote">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">逸闻<span class="caret"></span></a>
+                        <ul class="dropdown-menu ">
+                            <li> <a href="{% url 'anecodoteApp:anecodotes' 'nearby' %}">附近趣事</a></li>
+                            <li><a href="{% url 'anecodoteApp:anecodotes' 'network' %}">网络趣闻</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="hobby">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">爱好<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li ><a href="{% url 'hobbyApp:cartoon' %} ">动漫</a></li>
+                            <li ><a href="{% url 'hobbyApp:novel' %} ">小说 </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="line">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">金句<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'lineApp:lines' 'cartoonsaying' %} ">动漫语录</a></li>
+                            <li><a href="{% url 'lineApp:lines' 'booksaying' %} ">书籍名句 </a></li>
+                            <li><a href="{% url 'lineApp:lines' 'novelsaying' %} ">小说摘抄 </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="study">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">学习<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'studyApp:study' 'linux' %} ">python</a></li>
+                            <li><a href="{% url 'studyApp:study' 'python' %} ">linux </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="life">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">分享<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'shareApp:index' %} ">文章分享</a></li>
+                                
+                            </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="line"></div>
+  
+    
+   {% block content2 %}
+   {% endblock %} 
+    <div class="container web-footer">
+        <!--站点地图-->
+        <div class="row" id="map-footer">
+            <div class="col-md-2">
+                <dl>
+                    <dt>逸闻</dt>
+                    <dd> <a href="{% url 'anecodoteApp:anecodotes' 'nearby' %}">附近趣事</a></dd>
+                    <dd>  <a href="{% url 'anecodoteApp:anecodotes' 'network' %}">网络趣闻</a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>学习</dt>
+                    <dd><a href="{% url 'studyApp:study' 'python' %}">python</a></dd>
+                    <dd><a href="{% url 'studyApp:study' 'linux' %}">linux</a></dd>
+                    
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>金句</dt>
+                    <dd><a href="{% url 'lineApp:lines' 'cartoonsaying' %} ">动漫语录</dd>
+                    <dd><a href="{% url 'lineApp:lines' 'booksaying' %} ">书籍名言 </a></dd>
+                    <dd><a href="{% url 'lineApp:lines' 'novelsaying' %} ">小说摘抄 </a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>分享</dt>
+                    <dd><a href="{% url 'shareApp:index' %} ">文章分享</a></dd>
+                    
+                </dl>
+            </div>
+            <div class="col-md-4" id="wx">
+                <p>扫一扫添加血染的樱草花的个人微信</p>
+                <img class="qrimg" src="{% static 'img/1650471655583.png' %}">
+                
+            </div>
+        </div>
+        <!--版权-->
+        <div class="row" id="patent-footer">
+            <p>血染的樱草花的个人博客</p>
+        </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            $(".dropdown").mousemove(function () {
+                $(this).addClass("open");
+            });
+            $(".dropdown").mouseleave(function () {
+                $(this).removeClass("open");
+            });
+        })
+    </script>
+    <script>
+        $('#{{active_menu}}').addClass("active");
+    </script>
+    <script>
+        $('#{{sub_menu}}').addClass("active");
+    </script>
+</body>
+
+</html>

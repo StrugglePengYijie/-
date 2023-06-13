@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+动漫
+{% endblock %}
+{% block content %}
+
+<img class="img-responsive" src="{% static 'img/1650615370678.png' %} " width="1200px" >
+{% endblock %}
+{% block content2 %}
+<div class="container">
+    <div class="row row-3">
+        <div class="col-md-3">
+            <div class="model-title">
+                爱好
+            </div>
+            <div class="model-list">
+                <ul class="list-group">
+                    <li class="list-group-item " id="cartoon"><a href="{% url 'hobbyApp:cartoon' %}">动漫</a></li>
+                    <li class="list-group-item " id="novel"><a href="{% url 'hobbyApp:novel' %}">小说</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="model-details-title">
+                动漫
+            </div>
+            <div>
+                {% for cartoon in cartoons %}
+                <div class="col-md-4">
+                    <div class="thumbnail row row-1">
+                        <img src="{{cartoon.photo.url}}" >
+                        
+                        <div class="caption">
+                            <p>{{cartoon.description}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

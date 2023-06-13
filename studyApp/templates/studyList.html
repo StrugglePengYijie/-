@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load staticfiles%}
+
+{% block title%}
+{{studyName}}
+{% endblock %}
+
+{% block content%}
+<link href="{% static 'css/study.css' %}" rel="stylesheet">
+<!--广告横幅-->
+<div class="container-fluid">
+    <div class="row">
+        <img class="img-responsive" src="{% static 'img/new.jpg' %}">
+    </div>
+</div>
+<!--主体内容-->
+<div class="container">
+    <div class="row row-3">
+        <!--侧边导航栏-->
+        <div class="col-md-3">
+            <div class="model-title">
+                <div>学习</div>
+            </div>
+            <div class="model-list">
+                <ul class="list-group">
+                    <li class="list-group-item" id="python">
+                        <a href="{% url 'studyApp:study' 'python' %}">python</a>
+                    </li>
+                    <li class="list-group-item" id="linux">
+                        <a href="{% url 'studyApp:study' 'linux' %}">linux</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <!--说明文字和图片-->
+        <div class="col-md-9">
+            <div class="model-details-title ">
+                {{studyName}}
+                <!-- <div class="col-md-7 hidden-xs model-details-title-search">
+                    <form method="get" id="searchform" action="{% url 'haystack_search' %}">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="请输入关键词" required>
+                            <span class="input-group-btn">
+                                <input class="btn btn-default" type="submit" value="查询" />
+                            </span>
+                        </div>
+                    </form>
+                </div> -->
+            </div>
+            <!--此处填入产品列表内容-->
+            <div class="model-details">
+
+                {% for study1 in studylist %}
+                <div class="row">
+                    <div class="news-model">
+                        <img src="{% static 'img/newsicon.gif' %}">
+                        <a  href="{% url 'studyApp:studyDetail' study1.id %}"><b >{{study1.title}}</b></a>
+                        <span>【{{study1.publishDate|date:"Y-m-d"}}】</span>
+                       
+                        <p>{{study1.description|truncatechars:"110"}}...</p>
+                    </div>
+
+                </div>
+              
+                    {% endfor %}
+
+                    {% if pageData %}
+                    <div class="paging">
+                        <ul id="pages" class="pagination pagination-sm pagination-xs">
+                            {% if pageData.first %}
+                            <li><a href="?page=1">1</a></li>
+                            {% endif %}
+                            {% if pageData.left %}
+                            {% if pageData.left_has_more %}
+                            <li><span>...</span></li>
+                            {% endif %}
+                            {% for i in pageData.left %}
+                            <li><a href="?page={{i}}">{{i}}</a></li>
+                            {% endfor %}
+                            {% endif %}
+                            <li class="active"><a href="?page={{pageData.page}}">{{pageData.page}}</a></li>
+                            {% if pageData.right %}
+                            {% for i in pageData.right %}
+                            <li><a href="?page={{i}}">{{i}}</a></li>
+                            {% endfor %}
+                            {% if pageData.right_has_more %}
+                            <li><span>...</span></li>
+                            {% endif %}
+                            {% endif %}
+                            {% if pageData.last %}
+                            <li><a href="?page={{pageData.total_pages}}">{{pageData.total_pages}}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

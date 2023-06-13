@@ -1,0 +1,294 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block title %}
+首页
+{% endblock %}
+{% block content2 %}
+
+
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+<script src="{% static 'js/jqthumb.min.js' %}"></script>
+<!-- 广告横幅 -->
+<div id="ad" class="carousel slide" data-ride="carousel" data-interval="5000">
+  <ol class="carousel-indicators">
+    <li data-target="#ad" data-slide-to="0" class="active"></li>
+    <li data-target="#ad" data-slide-to="1"></li>
+    <li data-target="#ad" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner ">
+    <div class="item active">
+      <img src="{% static 'img/81e64df1ccd3461e949ea0a5279cbc28.jpg' %} " alt="广告横幅1 ">
+    </div>
+    <div class="item">
+      <img src="{% static 'img/c7a07b0bc5391714c08bc7b4e7abb2e7.jpeg' %} " alt="广告横幅2">
+    </div>
+    <div class="item">
+      <img src="{% static 'img/da4a92cfb4e6545ea81fdb915ef16d4d.jpeg' %} " alt="广告横幅3">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#ad" data-slide="prev"><span
+      class="glyphicon glyphicon-chevron-left"></span></a>
+  <a class="right carousel-control" href="#ad" data-slide="next"><span
+      class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<!-- 主体内容 -->
+<div class="container">
+  <div class="row row-3">
+
+    <div class="col-md-4">
+      <!-- 小说推荐 -->
+      <span class="part1">
+        <a href="{% url 'hobbyApp:novel' %}">小说推荐</a>
+      </span>
+      <span class="part1 en">
+        &nbsp;&nbsp;/novel
+      </span>
+      <div class="line1">
+        <div class="line2 theme"></div>
+      </div>
+      <div style="margin-top:20px;">
+        <img class="img-responsive" src="{% static 'img/1655097919441.png'  %}">
+        <ul class="list-unstyled list-new">
+         
+          <li>
+            <a  href="{% url 'hobbyApp:novel'  %}">
+              《剑来》</a>
+              <a href="{% url 'hobbyApp:novel'  %}" class="public-detail">
+                查看详情>>
+              </a>
+          </li>
+          <li>
+            <a  href="{% url 'hobbyApp:novel'  %}">
+              《龙族》</a>
+              <a href="{% url 'hobbyApp:novel'  %}" class="public-detail">
+                查看详情>>
+              </a>
+          </li>
+          <li>
+            <a  href="{% url 'hobbyApp:novel'  %}">
+              《雪中悍刀行》</a>
+              <a href="{% url 'hobbyApp:novel'  %}" class="public-detail">
+                查看详情>>
+              </a>
+          </li>
+          <li>
+            <a  href="{% url 'hobbyApp:novel'  %}">
+              《英雄联盟之绝世无双》</a>
+              <a href="{% url 'hobbyApp:novel'  %}" class="public-detail">
+                查看详情>>
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="col-md-8">
+
+      <span class="part1">
+        <a href="#">逸闻</a>
+      </span>
+      <span class="part1 en">
+        &nbsp;&nbsp;/ anecodate
+      </span>
+      <a class="btn btn-default btn-xs more-btn" href="{% url 'anecodoteApp:anecodotes' 'nearby' %}">
+        +&nbsp;更多
+      </a>
+      <div class="line1">
+        <div class="line2 theme"></div>
+      </div>
+      <div class="col-md-5">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators nav-point">
+            {% for post in anecodateList %}
+            <li data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" {% if forloop.first %} class="active"
+              {% endif %}>
+            </li>
+            {% endfor %}
+          </ol>
+          <!-- 轮播（Carousel）项目 -->
+          <div class="carousel-inner" style="margin-top:15px;">
+            {% for post in postList %}
+            <div {% if forloop.first %} class="item active " {% else %} class="item" {% endif %}
+              style="background-size:cover;">
+              <a href="{% url 'anecodoteApp:anecodoteDetail' post.id %}">
+                <img class='item1' src="{{post.photo.url}}" onload="DrawImage(this)"></a>
+              <div class="carousel-caption nav-title">{{post.title}}</div>
+            </div>
+            {% endfor %}
+          
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <ul class="list-unstyled list-new">
+          {% for anecodote1 in anecodoteList %}
+          <li>
+            <a  href="{% url 'anecodoteApp:anecodoteDetail' anecodote1.id %}">
+              {{anecodote1.title|truncatechars:"15"}}</a>
+            <span >【{{anecodote1.publishDate|date:"Y-m-d"}}】</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row row-3">
+
+    <div class="col-md-4">
+      <!-- 语录中心 -->
+      <span class="part1">
+        <a href="#">语录中心</a>
+      </span>
+      <span class="part1 en">
+        &nbsp;&nbsp;/ line
+      </span>
+      <a class="btn btn-default btn-xs more-btn" href="{% url 'lineApp:lines' 'cartoonsaying' %}">
+        +&nbsp;更多
+      </a>
+      <div class="line1">
+        <div class="line2 theme"></div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% static 'img/1651123356990.jpg' %}">
+        <ul class="list-unstyled list-new">
+          {% for note in lineList %}
+          <li>
+            <a href="{% url 'lineApp:lineDetail' note.id %}">
+              {{note.title|truncatechars:"25"}}
+            </a>
+            <a href="{% url 'lineApp:lineDetail' note.id %}" class="public-detail">
+              查看详情>>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-4">
+      <!-- 学习 -->
+      <span class="part1">
+        <a href="{% url 'studyApp:study' 'python' %}">学习</a>
+      </span>
+      <span class="part1 en">
+        &nbsp;&nbsp;/ study python
+      </span>
+      <div class="line1">
+        <div class="line2 theme"></div>
+      </div>
+      <div>
+        <a href="{% url 'studyApp:study' 'python' %}">
+          <img class="img-responsive" src="{% static 'img/QQ截图20220419195001.png' %}">
+        </a>
+        <ul class="list-unstyled list-new">
+          {% for note in studylist %}
+          <li>
+            <a href="{% url 'studyApp:studyDetail' note.id %}">
+              {{note.title|truncatechars:"25"}}
+            </a>
+            <a href="{% url 'studyApp:studyDetail' note.id %}" class="public-detail">
+              查看详情>>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+      <!-- 文章分享 -->
+      <span class="part1">
+        <a href="#">文章</a>
+      </span>
+      <span class="part1 en">
+        &nbsp;&nbsp;/ article
+      </span>
+      <a class="btn btn-default btn-xs more-btn" href="{% url 'shareApp:index'  %}">
+        +&nbsp;更多
+      </a>
+      <div class="line1">
+        <div class="line2 theme"></div>
+      </div>
+      <div>
+        <img class="img-responsive" src="{% static 'img/1655043197955.png' %}">
+        <ul class="list-unstyled list-new">
+          {% for article1 in articlelist %}
+          <li>
+            <a href="/shareApp/article/{{ article1.id }}">
+              {{article1.tit|truncatechars:"20"}}
+            </a>
+            <a href="/shareApp/article/{{ article1.id }}" class="public-detail">
+              查看详情>>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+    <div class="row row-3">
+      <!-- 动漫中心 -->
+      <div class="col-md-12 col-pro">
+
+        <span class="part1">
+          <a href="{% url 'hobbyApp:cartoon'  %}">动漫中心</a>
+        </span>
+        <span class="part1 en">
+          &nbsp;&nbsp;/ cartoon
+        </span>
+        <a class="btn btn-default btn-xs more-btn" href="{% url 'hobbyApp:cartoon'  %}">
+          +&nbsp;更多
+        </a>
+        <div class="line1" style="margin-bottom:5px;">
+          <div class="line2 theme"></div>
+        </div>
+        <div class="col-md-12 col-pro">
+          <div id="Carousel" class="carousel slide" style="margin-bottom:30px">
+            <ol class="carousel-indicators" style="display:none;">
+              <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class=" active">
+                <div class="row">
+                {% for cartoon in cartoonlist %}
+                  <div class="col-md-3 pro-images">
+                    <a href="{% url 'hobbyApp:cartoon'  %}" class="thumbnail">
+                      {% for img in cartoon.lineImgs.all %} 
+                      {% if forloop.first %}
+                      <img  src="{{img.photo.url}}" alt="动漫图片"  onload="DrawImage(this)">
+                      {% endif %}
+                      {% endfor %}
+                    </a>
+                    <div class="carousel-caption nav-title">{{cartoon.title}}</div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+    <script>
+      //处理缩略图
+      function DrawImage(hotimg) {
+        $(hotimg).jqthumb({
+          width: '100%', // 宽度
+          height: '200px', // 高度
+          zoom: '1', // 缩放比例
+          method: 'auto' // 提交方法，用于不同的浏览器环境，默认为‘auto’
+        });
+      }
+    </script>
+    {% endblock %}

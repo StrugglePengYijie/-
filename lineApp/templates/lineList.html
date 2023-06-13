@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+{{lineName}}
+{% endblock %}
+{% block content %}
+
+<img class="img-responsive" src="{% static 'img/1650615370678.png' %} " width="1200px">
+{% endblock %}
+{% block content2 %}
+<link href="{% static 'css/lines.css'%}" rel="stylesheet">
+<div class="container">
+    <div class="row row-3">
+        <div class="col-md-3">
+            <div class="model-title">
+                经典语录
+            </div>
+            <div class="model-list">
+                <ul class="list-group">
+                    <li class="list-group-item " id="cartoonsaying"><a href="{% url 'lineApp:lines' 'cartoonsaying' %} ">动漫语录</a></li>
+                    <li class="list-group-item " id="booksaying"><a href="{% url 'lineApp:lines' 'booksaying'%} ">书籍名句</a></li>
+                    <li class="list-group-item " id="novelsaying"><a href="{% url 'lineApp:lines' 'novelsaying' %} ">小说摘抄</li>
+                </ul>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="model-details-title">
+                {{lineName}}
+            </div>
+            <div class="model-details">
+                {% for line in lineList%}
+                <div class="row">
+                    <div class="col-md-6">
+                        {% for img in line.lineImgs.all%}
+                        {% if forloop.first %}
+                        <a href="{% url 'lineApp:lineDetail' line.id%}" class="thumbnail row-4">
+                            <img class="img-responsive" src="{{img.photo.url}}">
+                        </a>
+                        {% endif %}
+                        {%endfor%}
+                    </div>
+                    <div class="col-md-6">
+                        <h3>{{line.title|truncatechars:'20'}}</h3>
+                        <p>{{line.description|truncatechars:'150'|linebreaks}}</p>
+                        <div class=" row-5" >
+                            <div class="caption">
+                              <a href="{% url 'lineApp:lineDetail' line.id %}" class="btn btn-primary" role="button">查看详情</a>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if pageData %}
+                <div class="paging">
+                    <ul id="pages" class="pagination pagination-sm pagination-xs">
+                        {% if pageData.first %}
+                        <li><a href="?page=1">1</a></li>
+                        {% endif %}
+                        {% if pageData.left %}
+                        {% if pageData.left_has_more %}
+                        <li><span>...</span></li>
+                        {% endif %}
+                        {% for i in pageData.left %}
+                        <li><a href="?page={{i}}">{{i}}</a></li>
+                        {% endfor %}
+                        {% endif %}
+                        <li class="active"><a href="?page={{pageData.page}}">{{pageData.page}}</a></li>
+                        {% if pageData.right %}
+                        {% for i in pageData.right %}
+                        <li><a href="?page={{i}}">{{i}}</a></li>
+                        {% endfor %}
+                        {% if pageData.right_has_more %}
+                        <li><span>...</span></li>
+                        {% endif %}
+                        {% endif %}
+                        {% if pageData.last %}
+                        <li><a href="?page={{pageData.total_pages}}">{{pageData.total_pages}}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

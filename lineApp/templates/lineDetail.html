@@ -1,0 +1,37 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+{% block title %}
+详情介绍
+{% endblock %}
+
+
+{% block content2 %}
+<link href="{% static 'css/lines.css' %}" rel="stylesheet">
+<!-- 主体内容 -->
+<div class="container">
+    <div class="title">
+       <h3>{{line.title}}</h3> 
+    </div>
+    <div class="model-details">
+        {% for img in line.lineImgs.all %}
+        <div class="row-4">
+            <img class="img-responsive" src="{{img.photo.url}}">
+        </div>
+        {% endfor %}
+        <h3>作品介绍</h3>
+        <p>
+            {{line.description|linebreaks}}
+        </p>
+        <h3>经典语录</h3>
+        <p>
+            {{line.description2|linebreaks}}
+        </p>
+        <h3>个人评价</h3>
+        <p>
+            {{line.description3|linebreaks}}
+        </p>
+      
+        
+    </div>
+</div>
+{% endblock %}

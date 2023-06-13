@@ -1,0 +1,278 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>血染的樱草花个人博客{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header ">
+                <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example"
+                    aria-expanded="false">
+                    <span>导航栏</span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse " id="bs-example">
+                <ul class="nav navbar-nav" style="width:100%;">
+                    <li class="nav-top boke"><img src="{% static 'img/apple-touch-icon.png'%}" width="40px"></li>
+                    <li class="nav-top " id="home">
+                        <a href="{% url 'home' %} ">首页</a>
+                    </li>
+                    <li class="dropdown nav-top" id="anecodote">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">逸闻<span class="caret"></span></a>
+                        <ul class="dropdown-menu ">
+                            <li><a href="{% url 'anecodoteApp:anecodotes' 'nearby' %}">附近趣事</a></li>
+                            <li><a href="{% url 'anecodoteApp:anecodotes' 'network' %}">网络趣闻</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="hobby">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">爱好<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li ><a href="{% url 'hobbyApp:cartoon' %} ">动漫</a></li>
+                            <li ><a href="{% url 'hobbyApp:novel' %} ">小说 </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="line">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">金句<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'lineApp:lines' 'cartoonsaying' %} ">动漫语录</a></li>
+                            <li><a href="{% url 'lineApp:lines' 'booksaying' %} ">书籍名句 </a></li>
+                            <li><a href="{% url 'lineApp:lines' 'novelsaying' %} ">小说摘抄 </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="study">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">学习<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'studyApp:study' 'python' %} ">python</a></li>
+                            <li><a href="{% url 'studyApp:study' 'linux' %} ">linux </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id="life">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button"
+                            aria-expanded="false">分享<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'shareApp:index'  %} ">文章</a></li>
+                           
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="line"></div>
+    <div class="container">
+        <div class="row row-6">
+            <div class="col-md-9 ">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+            <div class="col-md-3 one">
+                <!-- <div >
+                    <img src="{% static 'img/QQ截图20220419195001.png' %}" height="200px" width="292px">
+                   
+                </div> -->
+                <div style="width:292px;height:200px;border:#ccc solid 1px;" id="dituContent"></div>
+                <div >
+                    <h4>血染的樱草花</h4>
+                    <ul class="two">
+                        <li>QQ: <span class="three">2704134702</span></li>
+                        <li>职业：<span class="three">学生</span></li>
+                        <li>现居：<span class="three">湖北武汉</span></li>
+                        <li>Email:<span class="three">2704134702@qq.com</span></li>
+                        <li>人生格言:<span class="three">2704134702</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   {% block content2 %}
+   {% endblock %} 
+    <div class="container web-footer">
+        <!--站点地图-->
+        <div class="row" id="map-footer">
+            <div class="col-md-2">
+                <dl>
+                    <dt>逸闻</dt>
+                    <dd><a href="{% url 'anecodoteApp:anecodotes' 'nearby' %}">附近趣事</a></dd>
+                    <dd><a href="{% url 'anecodoteApp:anecodotes' 'network' %}">网络趣闻</a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>学习</dt>
+                    <dd><a href="{% url 'studyApp:study' 'linux' %}">linux</a></dd>
+                    <dd><a href="{% url 'studyApp:study' 'python' %}">python</a></dd>
+                    
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>金句</dt>
+                    <dd><a href="{% url 'lineApp:lines' 'cartoonsaying' %} ">动漫语录</dd>
+                    <dd><a href="{% url 'lineApp:lines' 'booksaying' %} ">书籍名言 </a></dd>
+                    <dd><a href="{% url 'lineApp:lines' 'novelsaying' %} ">小说摘抄 </a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>分享</dt>
+                    <dd><a href="{% url 'shareApp:index'  %} ">文章</a></dd>
+                    
+                </dl>
+            </div>
+            <div class="col-md-4" id="wx">
+                <p>扫一扫添加血染的樱草花的个人微信</p>
+                <img class="qrimg" src="{% static 'img/1650471655583.png' %}">
+                
+            </div>
+        </div>
+        <!--版权-->
+        <div class="row" id="patent-footer">
+            <p>血染的樱草花的个人博客</p>
+        </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            $(".dropdown").mousemove(function () {
+                $(this).addClass("open");
+            });
+            $(".dropdown").mouseleave(function () {
+                $(this).removeClass("open");
+            });
+        })
+    </script>
+    <script>
+        $('#{{active_menu}}').addClass("active");
+    </script>
+    <script>
+        $('#{{sub_menu}}').addClass("active");
+    </script>
+
+
+
+
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        addMarker();//向地图中添加marker
+    }
+    
+    //创建地图函数：
+    function createMap(){
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(114.435885,30.453761);//定义一个中心点坐标
+        map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+    }
+    
+    //地图事件设置函数：
+    function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+    }
+    
+    //地图控件添加函数：
+    function addMapControl(){
+        //向地图中添加缩放控件
+	var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+	map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+	var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+	map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+	var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+	map.addControl(ctrl_sca);
+    }
+    
+    //标注点数组
+    var markerArr = [{title:"血染的樱草花",content:"血染的樱草花的住址",point:"114.434866|30.454983",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+		 ];
+    //创建marker
+    function addMarker(){
+        for(var i=0;i<markerArr.length;i++){
+            var json = markerArr[i];
+            var p0 = json.point.split("|")[0];
+            var p1 = json.point.split("|")[1];
+            var point = new BMap.Point(p0,p1);
+			var iconImg = createIcon(json.icon);
+            var marker = new BMap.Marker(point,{icon:iconImg});
+			var iw = createInfoWindow(i);
+			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+			marker.setLabel(label);
+            map.addOverlay(marker);
+            label.setStyle({
+                        borderColor:"#808080",
+                        color:"#333",
+                        cursor:"pointer"
+            });
+			
+			(function(){
+				var index = i;
+				var _iw = createInfoWindow(i);
+				var _marker = marker;
+				_marker.addEventListener("click",function(){
+				    this.openInfoWindow(_iw);
+			    });
+			    _iw.addEventListener("open",function(){
+				    _marker.getLabel().hide();
+			    })
+			    _iw.addEventListener("close",function(){
+				    _marker.getLabel().show();
+			    })
+				label.addEventListener("click",function(){
+				    _marker.openInfoWindow(_iw);
+			    })
+				if(!!json.isOpen){
+					label.hide();
+					_marker.openInfoWindow(_iw);
+				}
+			})()
+        }
+    }
+    //创建InfoWindow
+    function createInfoWindow(i){
+        var json = markerArr[i];
+        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+        return iw;
+    }
+    //创建一个Icon
+    function createIcon(json){
+        var icon = new BMap.Icon("http://map.baidu.com/image/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        return icon;
+    }
+    
+    initMap();//创建和初始化地图
+</script>
+</html>
+</body>
+
+</html>
